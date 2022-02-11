@@ -3,12 +3,14 @@ import cors from 'cors';
 import db from "./db.js";
 import cadastro from './routes/cadastroRouter.js';
 import login from './routes/loginRouter.js';
+import carrinho from './routes/carrinhoRouter.js';
 
 const server = express();
 server.use(cors());
 server.use(json());
 server.use(cadastro);
 server.use(login);
+server.use(carrinho);
 
 setInterval(remocaoAutomatica, 10000);
 
