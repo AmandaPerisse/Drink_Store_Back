@@ -11,7 +11,7 @@ export async function logar(req, res) {
             const token = uuid();
             const collectionSessions = db.collection('sessoes');
             await collectionSessions.insertOne({userId: usuario._id, token: token, hora: Date.now()})
-            res.send({userNome: usuario.nome, token: token});
+            res.status(201).send({userNome: usuario.nome, token: token, endereco: usuario.endereco});
         }
         else{
             res.sendStatus(404);
