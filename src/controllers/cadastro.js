@@ -9,7 +9,7 @@ export async function cadastrar(req, res){
     }
     else{
         const senhaHash = bcrypt.hashSync(req.body.senha, 10);
-        await collection.insertOne({nome: req.body.nome, email: req.body.email, endereco: req.body.endereco, senha: senhaHash}) 
+        await collection.insertOne({nome: req.body.nome, email: req.body.email, endereco: req.body.endereco, senha: senhaHash, pedidosAnteriores: []}) 
         res.sendStatus(201);
     }
 }
