@@ -1,7 +1,7 @@
 import { v4 as uuid } from 'uuid';
 import db from '../db.js';
 
-export async function carrinho(req, res) {
+export async function pedidosAnteriores(req, res) {
 
     const { authorization } = req.headers;
     const token = authorization?.replace('Bearer ', '');
@@ -17,9 +17,12 @@ export async function carrinho(req, res) {
         const tokenNovo = uuid();
         await collectionSessions.insertOne({userId: id, token: tokenNovo, time: Date.now()})
         const collection = db.collection('usuarios');
-        await collection.updateOne({ 
-			_id: id
-		}, { $push: {pedidosAnteriores: req.body }});
-        res.send({token: tokenNovo});
+        const usuario = await collection.findOne({_id: id})
+        if(usuario){
+            res.send({pedidos: usuario.pedidosAnteriores, token: tokenNovo});
+        }
+        else{
+            res.sendStatus(404);
+        }
     }
 }
