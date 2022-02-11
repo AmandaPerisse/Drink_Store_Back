@@ -5,6 +5,7 @@ import cadastro from './routes/cadastroRouter.js';
 import login from './routes/loginRouter.js';
 import carrinho from './routes/carrinhoRouter.js';
 import pedidosAnteriores from './routes/pedidosAnterioresRouter.js';
+import pesquisar from './routes/pesquisarRouter.js';
 
 const server = express();
 server.use(cors());
@@ -13,6 +14,7 @@ server.use(cadastro);
 server.use(login);
 server.use(carrinho);
 server.use(pedidosAnteriores);
+server.use(pesquisar);
 
 setInterval(remocaoAutomatica, 10000);
 
@@ -29,6 +31,6 @@ async function remocaoAutomatica(){
         }
     }
 }
-server.listen(process.env.PORT, () =>{
-    console.log("Rodando na porta " + process.env.PORT);
+server.listen(5000, () =>{
+    console.log("Rodando");
 });

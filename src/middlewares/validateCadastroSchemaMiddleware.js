@@ -4,6 +4,7 @@ export default function validateCadastroSchemaMiddleware(req, res, next){
     const validation = cadastroSchema.validate(req.body);
     if (validation.error) {
         res.sendStatus(422);
+        return null;
     }
     next();
 }
