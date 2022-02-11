@@ -29,6 +29,4 @@ async function remocaoAutomatica(){
 }
 
 
-server.listen(5000, () =>{
-    console.log("Rodando");
-});
+server.listen(process.env.PORT);
