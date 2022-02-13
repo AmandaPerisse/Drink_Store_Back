@@ -12,7 +12,7 @@ server.use(cadastro);
 server.use(login);
 server.use(bebidas);
 
-setInterval(remocaoAutomatica, 10000);
+setInterval(remocaoAutomatica, 100000);
 
 async function remocaoAutomatica(){
 
@@ -21,7 +21,7 @@ async function remocaoAutomatica(){
     if(resultado.length>0){
         for(let i = 0; i< resultado.length; i++){
             const agora = Date.now();
-            if (agora - resultado[i].hora >= 60000){
+            if (agora - resultado[i].hora >= 3600000){
                 await collection.deleteOne({userId: resultado[i].userId});
             }
         }
