@@ -9,15 +9,3 @@ export async function buscarBebidas(req, res) {
         res.sendStatus(500)
     }
 };
-
-export async function buscarBebida(req, res) {
-    const { tipo } = req.params;
-
-    try {
-        const bebida = await db.collection('bebidas').find({ tipo }).toArray();
-
-        res.status(200).send(bebida);
-    } catch (e) {
-        res.sendStatus(500)
-    }
-};
