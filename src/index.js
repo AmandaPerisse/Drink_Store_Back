@@ -4,6 +4,8 @@ import db from "./db.js";
 import cadastro from './routes/cadastroRouter.js';
 import login from './routes/loginRouter.js';
 import bebidas from './routes/bebidasRouter.js';
+import carrinho from './routes/carrinhoRouter.js';
+import pedidosAnteriores from './routes/pedidosAnterioresRouter.js';
 
 const server = express();
 server.use(cors());
@@ -11,6 +13,8 @@ server.use(json());
 server.use(cadastro);
 server.use(login);
 server.use(bebidas);
+server.use(carrinho);
+server.use(pedidosAnteriores);
 
 setInterval(remocaoAutomatica, 100000);
 
