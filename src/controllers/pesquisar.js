@@ -3,7 +3,6 @@ import db from '../db.js';
 
 export async function pesquisar(req, res) {
     
-    console.log(req.body)
     const { authorization } = req.headers;
     const token = authorization?.replace('Bearer ', '');
     if(!token) return res.sendStatus(401);
@@ -19,18 +18,21 @@ export async function pesquisar(req, res) {
         await collectionSessions.insertOne({userId: id, token: tokenNovo, time: Date.now()})
         const collection = db.collection('bebidas');
         const bebidas = await collection.find().toArray();
-        let listabebidas = [];
-        for(let i = 0; i< bebidas.length;i++){
-            if(bebidas){
-                console.log(bebidas[i].nome)
-                console.log(bebidas[i])
+        let listaBebidas = [];
+        if(bebidas){
+            for(let i = 0; i< bebidas.length;i++){
+                let nome = bebidas[i].nome.toLowerCase();
+                let pesquisa = req.body.pesquisa.toLowerCase();
+                if(nome.includes(pesquisa)){
+                    listaBebidas.push(bebidas[i]);
+                }
             }
         }
-        if(usuario){
-            res.send({pedidos: usuario.pedidosAnteriores, token: tokenNovo});
+        if(listaBebidas){
+            res.send({bebidas: listaBebidas, token: tokenNovo});
         }
         else{
-            res.sendStatus(404);
+            res.send("Não encontramos nenhuma bebida com esse nome..");
         }
     }
 }

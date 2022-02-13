@@ -4,6 +4,6 @@ import validatePesquisaSchemaMiddleware from '../middlewares/validatePesquisaSch
 
 const pesquisarRouter = Router();
 
-pesquisarRouter.get("/pesquisar", validatePesquisaSchemaMiddleware, pesquisar);
+pesquisarRouter.post("/pesquisar", validatePesquisaSchemaMiddleware, pesquisar);
 
 export default pesquisarRouter;
