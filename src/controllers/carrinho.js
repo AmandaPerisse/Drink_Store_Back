@@ -22,4 +22,17 @@ export async function carrinho(req, res) {
 		}, { $push: {pedidosAnteriores: req.body }});
         res.send({token: tokenNovo});
     }
-}
+};
+
+export async function buscarCarrinho(req, res) {
+    const { _id } = res.locals.usuario;
+
+    try {
+        const carrinho = await db.collection('carrinho').find({usuarioID: _id}).toArray();
+        console.log(carrinho);
+
+        res.status(201).send(carrinho);  
+    } catch (e) {
+        res.sendStatus(500)
+    }
+};

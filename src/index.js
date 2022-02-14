@@ -33,4 +33,4 @@ async function remocaoAutomatica(){
 }
 
 
-server.listen(5000, () => {console.log('Listening on port 5000')});
+server.listen(process.env.PORT);
