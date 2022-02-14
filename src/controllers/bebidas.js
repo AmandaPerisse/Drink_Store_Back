@@ -15,7 +15,7 @@ export async function postarCarrinho(req, res) {
     const { _id } = res.locals.usuario;
 
     try {
-        const bebida = await db.collection('carrinho').findOne({nomeBebida: nomeBebida, usuarioID: _id});   
+        const bebida = await db.collection('carrinho').findOne({nomeBebida, usuarioID: _id});   
         
         if (bebida) {
             await db.collection('carrinho').updateOne({nomeBebida: nomeBebida}, {$inc: {qtd: qtd}});

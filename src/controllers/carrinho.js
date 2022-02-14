@@ -21,7 +21,7 @@ export async function carrinho(req, res) {
 			_id: id
 		}, { $push: {pedidosAnteriores: req.body }});
         res.send({token: tokenNovo});
-        
+
         const pedidos = await db.collection('carrinho').findOne({usuarioID: session.userId});
         if (pedidos) {
             await db.collection('carrinho').deleteMany({usuarioID: id})
@@ -34,7 +34,6 @@ export async function buscarCarrinho(req, res) {
 
     try {
         const carrinho = await db.collection('carrinho').find({usuarioID: _id}).toArray();
-        console.log(carrinho);
 
         res.status(201).send(carrinho);  
     } catch (e) {
