@@ -21,6 +21,11 @@ export async function carrinho(req, res) {
 			_id: id
 		}, { $push: {pedidosAnteriores: req.body }});
         res.send({token: tokenNovo});
+        
+        const pedidos = await db.collection('carrinho').findOne({usuarioID: session.userId});
+        if (pedidos) {
+            await db.collection('carrinho').deleteMany({usuarioID: id})
+        }
     }
 };
 

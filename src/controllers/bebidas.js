@@ -12,10 +12,10 @@ export async function buscarBebidas(req, res) {
 
 export async function postarCarrinho(req, res) {
     const {nomeBebida, preco, qtd} = req.body;
-    const { _id } = res.locals.usuario
+    const { _id } = res.locals.usuario;
 
     try {
-        const bebida = await db.collection('carrinho').findOne({nomeBebida, _id});   
+        const bebida = await db.collection('carrinho').findOne({nomeBebida: nomeBebida, usuarioID: _id});   
         
         if (bebida) {
             await db.collection('carrinho').updateOne({nomeBebida: nomeBebida}, {$inc: {qtd: qtd}});
