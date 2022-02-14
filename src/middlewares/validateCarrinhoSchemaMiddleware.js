@@ -1,7 +1,7 @@
-import CarrinhoSchema from '../schemas/CarrinhoSchema.js';
+import carrinhoSchema from '../schemas/carrinhoSchema.js';
 
 export default function validateCarrinhoSchemaMiddleware(req, res, next){
-    const validation = CarrinhoSchema.validate(req.body);
+    const validation = carrinhoSchema.validate(req.body);
     if (validation.error) {
         res.sendStatus(422);
         return null;
